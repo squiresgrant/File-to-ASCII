@@ -22,7 +22,6 @@ def main():
       if path.exists(r"C:\Users\\"+userName+"\Documents\Completed\\" +str(n)+".txt") == True:
         n += 1
       else:
-        n=n-1
         print("Found free file space")
         break
     print(n)
