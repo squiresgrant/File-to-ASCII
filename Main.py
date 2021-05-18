@@ -1,7 +1,5 @@
 '''
-
 https://stackoverflow.com/questions/29760402/converting-a-txt-file-to-an-image-in-python/29775654
-
 '''
 
 
@@ -12,7 +10,8 @@ import PIL.Image
 import PIL.ImageFont
 import PIL.ImageOps
 import PIL.ImageDraw
-
+import getpass
+userName = getpass.getuser()#get windows user
 PIXEL_ON = 0  # PIL color to use for "on"
 PIXEL_OFF = 255  # PIL color to use for "off"
 
@@ -20,19 +19,19 @@ def main():
     n = 1
     
     while n != 0:
-      if path.exists("Completed/"+str(n)+".png") == True:
+      if path.exists(r"C:\Users\\"+userName+"\Documents\Completed\\" +str(n)+".txt") == True:
         n += 1
       else:
-       print("Found free file space")
-       break
-		
-    image = text_image('Completed/'+str(n)+'.txt')
+        n=n-1
+        print("Found free file space")
+        break
+    print(n)
+    image = text_image(r"C:/Users/"+userName+"/Documents/Completed/"+str(n)+".txt")
     image.show()
-    image.save('Completed/'+str(n)+'.png')
+    image.save(r"C:\Users\\"+userName+"\Documents\Completed\\"+str(n)+".png")
 
 def text_image(text_path, font_path=None):
     """Convert text file to a grayscale image with black characters on a white background.
-
     arguments:
     text_path - the content of this file will be converted to an image
     font_path - path to a font file (for example impact.ttf)
