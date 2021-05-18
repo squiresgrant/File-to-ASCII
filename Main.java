@@ -9,7 +9,10 @@ import javax.swing.*;
 
 public class Main{
   public static void main(String args[])throws IOException{
-		ProcessBuilder pb = new ProcessBuilder("python","Main.py").inheritIO();
+        String userName = System.getProperty("user.name");
+		ProcessBuilder pb = new ProcessBuilder("python","C:\\Users\\"+userName+"\\Documents\\Main.py").inheritIO();
+		ProcessBuilder ge = new ProcessBuilder("python","C:\\Users\\"+userName+"\\Documents\\GifFrame.py").inheritIO();
+		ProcessBuilder gi = new ProcessBuilder("python","C:\\Users\\"+userName+"\\Documents\\ToGif.py").inheritIO();
 		//ProcessBuilder star = new ProcessBuilder("pip", "install", "opencv-python").inheritIO();
 		//Process e = star.start();
 		/*
@@ -28,9 +31,9 @@ public class Main{
     BufferedImage img = null;
     File f = null;
 		int pixel;
-		File f1 = new File("Completed");  
+		File f1 = new File("C:\\Users\\"+userName+"\\Documents\\Completed");  
 		boolean value = f1.mkdir();
-		File f2 = new File("Input");  
+		File f2 = new File("C:\\Users\\"+userName+"\\Documents\\Input");  
 		try {
 		value = f2.mkdir();
 		}
@@ -41,14 +44,14 @@ public class Main{
 		for (String pathname : pathnames) {
             
 			if (pathname.endsWith(".jpg")) {
-				last = "Input/" + pathname;
+				last = "C:\\Users\\"+userName+"\\Documents\\Input\\" + pathname;
 				File using = new File(last);
 				img = ImageIO.read(using);
 				boolean end = using.delete();
 				//aggggghhhhhhhhhh
 				break;
 			} else if (pathname.endsWith(".png")) {
-				last = "Input/" + pathname;
+				last = "C:\\Users\\"+userName+"\\Documents\\Input\\" + pathname;
 				File using = new File(last);
 				img = ImageIO.read(using);
 				boolean end = using.delete();
@@ -56,7 +59,7 @@ public class Main{
 				break;
 
 			} else if (pathname.endsWith(".jpeg")) {
-				last = "Input/" + pathname;
+				last = "C:\\Users\\"+userName+"\\Documents\\Input\\" + pathname;
 				File using = new File(last);
 				img = ImageIO.read(using);
 				boolean end = using.delete();
@@ -64,24 +67,79 @@ public class Main{
 				break;
 
 			} else if (pathname.endsWith(".txt")) {
-				last = "Input/" + pathname;
+				last = "C:\\Users\\"+userName+"\\Documents\\Input\\" + pathname;
 				File using = new File(last);
 				using.renameTo(new File("Completed/"+pathname));
 				
 				break;
+			} else if (pathname.endsWith(".gif")) {
+				//run c# or py file
+				System.out.println(".gif Not yet supported on some places(sorry!)");
+				System.out.println("Attempting");
+				last = "y";
+				Process ll = ge.start();
+				try {
+					ll.waitFor();
+					} catch(Exception eww) {
+						System.out.println("Error with .png to .gif");
+					}
+				
+					System.out.println("Error, GifFrame.py not found");
+				
+	
 			}
       }
-			
-
+		/*	
+for (String pathname2 : pathnames2){
+     if (pathname2.endsWith(".txt")) {
+			 last = "Completed/" + pathname2;
+				File using = new File(last);
+				boolean end = using.delete();
+				last = "no";
+		 }
+}
+*/
 		
 		if (last == "no"){
-			System.out.println("Could not find any (more) files");
+			int w = 0;
+			try {
+			for (String pathname: pathnames2) {
+				if (pathname.endsWith(".png")) {
+					w = 1;
+				}
+			}
+			} catch (Exception www) {}
+			if (w==1){
+			int hh = 0;
+			System.out.println("Convert all .png files to .gif? type 1 for yes");
+			Scanner inputs = new Scanner(System.in);
+			if (inputs.nextInt() == 1) {
+					Process e = gi.start();
+					try {
+					e.waitFor();
+					} catch(Exception eww) {
+						System.out.println("Error with .png to .gif, ToGif.py (maybe) not found");
+					}
+					
+
+					
+				
+			
+			
+			} else {
+				System.out.println("Could not find any (more) (usable) files");
+			  return;	
+			}
+			}
+			System.out.println("Could not find any (more) (usable) files");
 			return;
-		}
+			}
+		
+
 
     //read image
 		
-		Formatter file = new Formatter("output.txt");
+		Formatter file = new Formatter("C:\\Users\\"+userName+"\\Documents\\output.txt");
 
 		int n = 1;
 		Boolean run = true;
@@ -108,7 +166,7 @@ public class Main{
 		int a = i.nextInt();
 		*/ 
 
-		      
+		     /* 
 		int a = 1;  
 		if (width >= 300) {
 			a = 2;
@@ -122,6 +180,8 @@ public class Main{
 		if (width >= 2000) {
 			a = 10;
 		} 
+		*/
+		int a = 2;
 		
 	
 		//for (int row = 0; row < height; row++) {
@@ -215,7 +275,7 @@ public class Main{
 				out = "@";
 			}
 			
-			file2.format("%s %s", out, " ");
+			file2.format("%s %s", out, "");
 			
 
 			/*
@@ -244,9 +304,16 @@ public class Main{
 	try {
 	p.waitFor();
 	} catch(Exception eww) {
-		System.out.println("Error with .txt to .png");
+		System.out.println("Error with .txt to .png, check for Main.py file");
 	}
 	System.out.println("Completed :)\n\nSaved under "+nn+"\n------\nFor best results copy and past the .txt file into notepad++\n\n(loading number may have ended on a weird number :) it does that sometimes)");
+	for (String pathname : pathnames2) {
+		if (pathname.endsWith(".txt")) {
+			String last2 = "C:\\Users\\"+userName+"\\Documents\\Completed\\" + pathname;
+			File using2 = new File(last2);
+			boolean end2 = using2.delete();
+		}
+	}
 	
 	file2.close();
 
